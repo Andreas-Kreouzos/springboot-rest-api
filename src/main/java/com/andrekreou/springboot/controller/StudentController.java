@@ -80,9 +80,19 @@ public class StudentController {
      */
     @PutMapping("students/{id}/update")
     public Student updateStudent(@RequestBody Student student,
-                                 @PathVariable("id") int studentid) {
+                                 @PathVariable("id") int studentId) {
         System.out.println(student.getFirstName());
         System.out.println(student.getLastName());
         return student;
+    }
+
+    /**
+     * Spring Boot REST API that handles HTTP DELETE Request
+     * http://[::1]:8080/students/1/delete
+     */
+    @DeleteMapping("students/{id}/delete")
+    public String deleteStudent(@PathVariable("id") int studentId) {
+        System.out.println(studentId);
+        return "Student deleted successfully!";
     }
 }
