@@ -1,4 +1,4 @@
-package com.andrekreou.springboot.courseone.bean.controller;
+package com.andrekreou.springboot.courseone.controller;
 
 import com.andrekreou.springboot.courseone.bean.Student;
 import org.springframework.http.HttpStatus;
