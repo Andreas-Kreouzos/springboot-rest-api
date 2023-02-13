@@ -41,4 +41,13 @@ public class StudentControllerTest {
                         "{\"id\":3,\"firstName\":\"Antonios\",\"lastName\":\"Lazos\"}," +
                         "{\"id\":4,\"firstName\":\"Georgios Ioannis\",\"lastName\":\"Zacharopoulos\"}]"));
     }
+
+    @Test
+    @DisplayName("Should return the student with the corresponding path variable values")
+    public void studentPathVariable() throws Exception {
+        mockMvc.perform(get("/students/1/Andreas/Kreouzos"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().json("{\"id\":1,\"firstName\":\"Andreas\",\"lastName\":\"Kreouzos\"}"));
+    }
 }
