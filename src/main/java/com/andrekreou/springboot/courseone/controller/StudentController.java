@@ -1,6 +1,6 @@
-package com.andrekreou.springboot.controller;
+package com.andrekreou.springboot.courseone.bean.controller;
 
-import com.andrekreou.springboot.bean.Student;
+import com.andrekreou.springboot.courseone.bean.Student;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

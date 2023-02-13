@@ -1,4 +1,4 @@
-package com.andrekreou.springboot.controller;
+package com.andrekreou.springboot.courseone.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
