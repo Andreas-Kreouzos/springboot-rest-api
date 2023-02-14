@@ -69,12 +69,17 @@ public class StudentControllerTest {
     @Test
     @DisplayName("Should return the student which updated through a put request")
     public void updateStudent() throws Exception {
+        mockMvc.perform(post("/students/create")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"id\":1,\"firstName\":\"Andreas\",\"lastName\":\"Kreouzos\"}"))
+                .andExpect(status().isCreated());
+
         mockMvc.perform(put("/students/1/update")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"id\":6,\"firstName\":\"Andreas\",\"lastName\":\"Kreouzos\"}"))
+                        .content("{\"id\":1,\"firstName\":\"Dimitris\",\"lastName\":\"Kreouzos\"}"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", is(6)))
-                .andExpect(jsonPath("$.firstName", is("Andreas")))
+                .andExpect(jsonPath("$.id", is(1)))
+                .andExpect(jsonPath("$.firstName", is("Dimitris")))
                 .andExpect(jsonPath("$.lastName", is("Kreouzos")));
     }
 
