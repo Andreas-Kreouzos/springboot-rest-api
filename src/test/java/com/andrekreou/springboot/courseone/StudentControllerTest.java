@@ -9,9 +9,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.hamcrest.Matchers.is;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -60,5 +59,17 @@ public class StudentControllerTest {
                 .andExpect(status().isCreated())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().json("{\"id\":6,\"firstName\":\"Andreas\",\"lastName\":\"Kreouzos\"}"));
+    }
+
+    @Test
+    @DisplayName("Should return the student which updated through a put request")
+    public void updateStudent() throws Exception {
+        mockMvc.perform(put("/students/1/update")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"id\":6,\"firstName\":\"Andreas\",\"lastName\":\"Kreouzos\"}"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id", is(6)))
+                .andExpect(jsonPath("$.firstName", is("Andreas")))
+                .andExpect(jsonPath("$.lastName", is("Kreouzos")));
     }
 }

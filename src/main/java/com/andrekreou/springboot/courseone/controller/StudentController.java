@@ -82,7 +82,7 @@ public class StudentController {
 
     /**
      * Spring Boot REST API that handles HTTP PUT Request
-     * http://[::1]:8080/students/1/create
+     * http://[::1]:8080/students/1/update
      */
     @PutMapping("{id}/update")
     public ResponseEntity<Student> updateStudent(@RequestBody Student student,
