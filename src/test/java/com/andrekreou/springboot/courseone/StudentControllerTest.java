@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -49,5 +49,16 @@ public class StudentControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().json("{\"id\":1,\"firstName\":\"Andreas\",\"lastName\":\"Kreouzos\"}"));
+    }
+
+    @Test
+    @DisplayName("Should return the student which created through a post request")
+    public void createStudent() throws Exception {
+        mockMvc.perform(post("/students/create")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"id\":6,\"firstName\":\"Andreas\",\"lastName\":\"Kreouzos\"}"))
+                .andExpect(status().isCreated())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().json("{\"id\":6,\"firstName\":\"Andreas\",\"lastName\":\"Kreouzos\"}"));
     }
 }
