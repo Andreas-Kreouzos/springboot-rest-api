@@ -1,5 +1,7 @@
 package com.andrekreou.springboot.courseone;
 
+import com.andrekreou.springboot.courseone.bean.Student;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -71,5 +76,18 @@ public class StudentControllerTest {
                 .andExpect(jsonPath("$.id", is(6)))
                 .andExpect(jsonPath("$.firstName", is("Andreas")))
                 .andExpect(jsonPath("$.lastName", is("Kreouzos")));
+    }
+
+    @Test
+    @DisplayName("Should delete the student through a delete request")
+    public void deleteStudentTest() throws Exception {
+        mockMvc.perform(post("/students/create")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"id\":1,\"firstName\":\"Andreas\",\"lastName\":\"Kreouzos\"}"))
+                .andExpect(status().isCreated());
+
+        mockMvc.perform(delete("/students/1/delete"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Student deleted successfully!"));
     }
 }
