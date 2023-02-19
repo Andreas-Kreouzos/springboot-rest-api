@@ -5,10 +5,7 @@ import com.andrekreou.springboot.coursetwo.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
@@ -17,9 +14,23 @@ public class UserController {
 
     private UserService userService;
 
+    /**
+     * Spring Boot REST API creates a User
+     * http://[::1]:8080/api/users
+     */
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody User user){
         User savedUser = userService.createUser(user);
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
+    }
+
+    /**
+     * Spring Boot REST API gets a User by Id
+     * http://[::1]:8080/api/users/1
+     */
+    @GetMapping("{id}")
+    public ResponseEntity<User> getUserById(@PathVariable("id") Long userId){
+        User user = userService.getUserById(userId);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 }
