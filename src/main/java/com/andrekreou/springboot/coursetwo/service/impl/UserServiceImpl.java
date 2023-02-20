@@ -38,4 +38,9 @@ public class UserServiceImpl implements UserService {
         existingUser.setEmail(user.getEmail());
         return userRepository.save(existingUser);
     }
+
+    @Override
+    public void deleteUser(Long userId) {
+        userRepository.deleteById(userId);
+    }
 }
