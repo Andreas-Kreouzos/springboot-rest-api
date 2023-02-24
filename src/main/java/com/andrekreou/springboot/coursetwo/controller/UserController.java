@@ -1,5 +1,6 @@
 package com.andrekreou.springboot.coursetwo.controller;
 
+import com.andrekreou.springboot.coursetwo.dto.UserDto;
 import com.andrekreou.springboot.coursetwo.entity.User;
 import com.andrekreou.springboot.coursetwo.service.UserService;
 import lombok.AllArgsConstructor;
@@ -21,8 +22,8 @@ public class UserController {
      * http://[::1]:8080/api/users
      */
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user){
-        User savedUser = userService.createUser(user);
+    public ResponseEntity<UserDto> createUser(@RequestBody UserDto user){
+        UserDto savedUser = userService.createUser(user);
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
 
