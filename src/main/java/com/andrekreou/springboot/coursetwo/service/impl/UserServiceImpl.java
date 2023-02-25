@@ -2,6 +2,7 @@ package com.andrekreou.springboot.coursetwo.service.impl;
 
 import com.andrekreou.springboot.coursetwo.dto.UserDto;
 import com.andrekreou.springboot.coursetwo.entity.User;
+import com.andrekreou.springboot.coursetwo.mapper.UserMapper;
 import com.andrekreou.springboot.coursetwo.repository.UserRepository;
 import com.andrekreou.springboot.coursetwo.service.UserService;
 import lombok.AllArgsConstructor;
@@ -16,22 +17,15 @@ public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
 
+    /**
+     * Converts UserDto into User JPA Entity and then back
+     * again from User JPA Entity to UserDto
+     */
     @Override
     public UserDto createUser(UserDto userDto) {
-        User user = new User(
-                userDto.getId(),
-                userDto.getFirstName(),
-                userDto.getLastName(),
-                userDto.getEmail()
-        );
+        User user = UserMapper.mapToUser(userDto);
         User savedUser = userRepository.save(user);
-        UserDto savedUserDto = new UserDto(
-                savedUser.getId(),
-                savedUser.getFirstName(),
-                savedUser.getLastName(),
-                savedUser.getEmail()
-        );
-        return savedUserDto;
+        return UserMapper.mapToUserDto(savedUser);
     }
 
     @Override
