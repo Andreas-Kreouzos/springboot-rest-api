@@ -1,7 +1,6 @@
 package com.andrekreou.springboot.coursetwo.controller;
 
 import com.andrekreou.springboot.coursetwo.dto.UserDto;
-import com.andrekreou.springboot.coursetwo.entity.User;
 import com.andrekreou.springboot.coursetwo.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
