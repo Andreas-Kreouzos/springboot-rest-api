@@ -1,6 +1,5 @@
 package com.andrekreou.springboot.courseone.bean;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
